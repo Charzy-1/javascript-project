@@ -1,31 +1,5 @@
-// FIrst step here is to SAVE THE DATA by creating an array of object to hold all cards to be generated
-
-const products = [{
-  image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
-  name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
-  rating: {
-    stars: '4.5',
-    count: '87'
-  },
-  priceCent: '1090'
-}, {
-  image: 'images/products/intermediate-composite-basketball.jpg',
-  name: 'Intermediate Size Basketball',
-  rating: {
-    stars: '4.5',
-    count: '127'
-  },
-  priceCent: '2095'
-}, {
-  image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
-  name: 'Adults Plain Cotton T-Shirt - 2 Pack',
-  rating: {
-    stars: '4',
-    count: '56'
-  },
-  priceCent: '799'
-}];
-
+// FIrst step here is to SAVE THE DATA by creating an array of object to hold all cards to be generated. 
+// But datais now saved inside the cart.js file and loaded on the html page
 
 let productsHTML = '';
 
@@ -77,13 +51,12 @@ products.forEach((product) => {
       Added
     </div>
 
-    <button class="add-to-cart-button button-primary">
+    <button class="add-to-cart-button button-primary js-add-to-cart"
+    data-product-id='${product.id}'>
       Add to Cart
     </button>
   </div>`
 });
-
-console.log(productsHTML)
 
 // Last step is combine the HTML together and put on the webpage by createing a variable above name productsHTML
 
@@ -92,3 +65,34 @@ console.log(productsHTML)
 const productGrid = document.querySelector('.js-product-grid');
 
 productGrid.innerHTML = productsHTML;
+
+// Third Step is to make the page interactive 
+
+// finds every button on the page 
+document.querySelectorAll('.js-add-to-cart')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      const productId1 = button.dataset.productId;
+      // create a temporary box to hold the item when looping through 
+      let matchingItem;
+
+      // check if the product is in the cart by looping through the cart using forEach loop
+      cart.forEach((item) => {
+        if (productId1 === item.productId) {
+          matchingItem = item;
+        }
+      });
+
+      // if it is, increase the quantity and if Notification, add it to the cart 
+      if (matchingItem) {
+        matchingItem.quantity += 1
+      } else {
+        cart.push({
+        productId: productId1,
+        quantity: 1
+      });
+      }
+
+      console.log(cart);
+    });
+  });
