@@ -93,6 +93,15 @@ document.querySelectorAll('.js-add-to-cart')
       });
       }
 
-      console.log(cart);
+      // To sum the number of quantity selected by the User, we loop throught the cart and update the quantity 
+      let cartQuantity = 0;
+
+      cart.forEach((item) => {
+        // cartQuantity = cartQuantity + item.quantity;
+        cartQuantity += item.quantity;
+      });
+
+      document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
     });
   });
