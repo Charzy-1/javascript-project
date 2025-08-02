@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addTOCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 // FIrst step here is to SAVE THE DATA by creating an array of object to hold all cards to be generated. 
@@ -71,40 +71,28 @@ productGrid.innerHTML = productsHTML;
 
 // Third Step is to make the page interactive 
 
+// Write a funtion that update cart quantity 
+function updateCartQuantity () {
+  // To sum the number of quantity selected by the User, we loop throught the cart and update the quantity 
+      let cartQuantity = 0;
+
+      cart.forEach((cartItem) => {
+        // cartQuantity = cartQuantity + item.quantity;
+        cartQuantity += cartItem.quantity;
+      });
+
+      document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
+}
+
 // finds every button on the page 
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const productId1 = button.dataset.productId;
-      // create a temporary box to hold the item when looping through 
-      let matchingItem;
 
-      // check if the product is in the cart by looping through the cart using forEach loop
-      cart.forEach((item) => {
-        if (productId1 === item.productId) {
-          matchingItem = item;
-        }
-      });
-
-      // if it is, increase the quantity and if Notification, add it to the cart 
-      if (matchingItem) {
-        matchingItem.quantity += 1
-      } else {
-        cart.push({
-        productId: productId1,
-        quantity: 1
-      });
-      }
-
-      // To sum the number of quantity selected by the User, we loop throught the cart and update the quantity 
-      let cartQuantity = 0;
-
-      cart.forEach((item) => {
-        // cartQuantity = cartQuantity + item.quantity;
-        cartQuantity += item.quantity;
-      });
-
-      document.querySelector('.js-cart-quantity')
-        .innerHTML = cartQuantity;
+      // call add to cart and update cart function 
+      addTOCart(productId1);
+      updateCartQuantity();
     });
   });
