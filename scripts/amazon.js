@@ -1,3 +1,6 @@
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
+
 // FIrst step here is to SAVE THE DATA by creating an array of object to hold all cards to be generated. 
 // But datais now saved inside the cart.js file and loaded on the html page
 
