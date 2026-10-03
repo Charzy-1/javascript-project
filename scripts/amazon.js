@@ -1,7 +1,7 @@
 /* 
 STEP ONE:
 SAVING THE DATA IN ARRAY OF OBJECTS.
-*/
+
 const products = [{
   image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
   name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
@@ -28,12 +28,20 @@ const products = [{
     count: 56
   },
   priceCents: 799
+
+}, {
+  image: 'images/products/black-2-slot-toaster.jpg',
+  name: '2 Slot Toaster - Black',
+  ratings: {
+    stars: 5,
+    count: 2197
+  },
+  priceCents: 1899
 }];
 
-/*
 SECOND STEP
-GENERATE THE HTML USING FOREACH TO LOOP THROUGH THE ARRAY
-WHAT FOREACH DOES THAT IS THAT IT SAVES EACH ARRAY INTO THE PARAMETER PASSED INSIDE THE FUNCTION AND RUN THE ARROW FUNCTION
+GENERATE THE HTML USING FOREACH TO LOOP THROUGH THE ARRAY.
+WHAT FOREACH DOES IS THAT IT SAVES EACH ARRAY INTO THE PARAMETER PASSED INSIDE THE FUNCTION AND RUN THE ARROW FUNCTION
 */
 
 let productsHTML = '';
@@ -56,14 +64,14 @@ products.forEach((param) => {
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${param.ratings.stars * 10}.png">
+          src="images/ratings/rating-${param.rating.stars * 10}.png">
         <div class="product-rating-count link-primary">
-          ${param.ratings.count}
+          ${param.rating.count}
         </div>
       </div>
 
       <div class="product-price">
-        $${param.priceCents / 100}
+        $${(param.priceCents / 100).toFixed(2)}
       </div>
 
       <div class="product-quantity-container">
