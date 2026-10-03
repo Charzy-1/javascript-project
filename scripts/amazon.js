@@ -135,6 +135,23 @@ document.querySelectorAll('.js-add-cart-btn')
         });
       }
 
+      // FOR US TO GET TO TOTAL NUMBER OF QUANTITY ADDED TO cart, WE NEED TO SUM ALL QUANTITIES ADDED
+      // lET'S GET A VARIABLE TO HOLD THE QUANTITY
+      let cartQuantity = 0;
+
+      // LOOPING THROUGH THE CART AGAIN USING FOREACH
+      cart.forEach((item) => {
+        cartQuantity += item.quantity
+      });
+      
       console.log(cart);
+
+      console.log(`Total added to cart is ${cartQuantity}`);
+
+      // Putting the cart on the page
+      document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
     })  
   })
+
+  
