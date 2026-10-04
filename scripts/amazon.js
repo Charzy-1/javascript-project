@@ -143,10 +143,6 @@ document.querySelectorAll('.js-add-cart-btn')
       cart.forEach((item) => {
         cartQuantity += item.quantity
       });
-      
-      console.log(cart);
-
-      console.log(`Total added to cart is ${cartQuantity}`);
 
       // Putting the cart on the page
       document.querySelector('.js-cart-quantity')
