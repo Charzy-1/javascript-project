@@ -1,3 +1,5 @@
+import {cart} from '../data/cart.js';
+
 /* 
 STEP ONE:
 SAVING THE DATA IN ARRAY OF OBJECTS.
