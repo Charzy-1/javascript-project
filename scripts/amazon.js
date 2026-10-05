@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import { products } from '../data/products.js';
 
 /* 
@@ -111,45 +111,37 @@ products.forEach((param) => {
 document.querySelector('.js-products-grid')
 .innerHTML = productsHTML;
 
+// FUNCTION TO UPDATE CART QUANTITY
+function updateCartQuantity() {
+  // FOR US TO GET TO TOTAL NUMBER OF QUANTITY ADDED TO cart, WE NEED TO SUM ALL QUANTITIES ADDED
+
+  // lET'S GET A VARIABLE TO HOLD THE QUANTITY
+  let cartQuantity = 0;
+
+  // LOOPING THROUGH THE CART AGAIN USING FOREACH
+  cart.forEach((item) => {
+    cartQuantity += item.quantity
+  });
+
+  // Putting the cart on the page
+  document.querySelector('.js-cart-quantity')
+    .innerHTML = cartQuantity;
+}
+
 // TO MAKE THE PAGE INTERACTIVE WHEN WE CLICK ON THE Add to Cart Button, WE ADD EVENTLISTENERS TO THE BUTTON
+
 // We loop through each button, add eventlistener to the button and perform a function when clicked
 document.querySelectorAll('.js-add-cart-btn')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const productId = button.dataset.productId;
 
-      // Check if product name is already in the cart by looping through the cart using forEach method
+      // call the add to cart function
+      addToCart(productId);
 
-      let matchingItem;
-
-      cart.forEach((item) => {
-        if (productId === item.productId) {
-          matchingItem = item;
-        }
-      });
-
-      // If the product name is found, only increase it's quantity else add it to the cart. Remember matching item is an object now.
-      if (matchingItem) {
-        matchingItem.quantity += 1;
-      } else {
-        cart.push({
-          productId: productId,
-          quantity: 1
-        });
-      }
-
-      // FOR US TO GET TO TOTAL NUMBER OF QUANTITY ADDED TO cart, WE NEED TO SUM ALL QUANTITIES ADDED
-      // lET'S GET A VARIABLE TO HOLD THE QUANTITY
-      let cartQuantity = 0;
-
-      // LOOPING THROUGH THE CART AGAIN USING FOREACH
-      cart.forEach((item) => {
-        cartQuantity += item.quantity
-      });
-
-      // Putting the cart on the page
-      document.querySelector('.js-cart-quantity')
-        .innerHTML = cartQuantity;
+      // run the updateCartQuantity function
+      updateCartQuantity();
+      
     })  
   })
 
