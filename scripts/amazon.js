@@ -144,8 +144,3 @@ document.querySelectorAll('.js-add-cart-btn')
       
     })  
   })
-
-function additem() {
-  console.log('just a test')
-}
-  
