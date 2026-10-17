@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js";
+import { cart, removeFromCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 
 // THE LAST STEP IS TO COMBINE THE HTML TOGETHER AND PUT IT ON THE PAGE BY STORING IT IN A A VARIABLE
@@ -47,7 +47,7 @@ cart.forEach((cartItem) => {
             <span class="update-quantity-link link-primary">
               Update
             </span>
-            <span class="delete-quantity-link link-primary">
+            <span class="delete-quantity-link link-primary js-delete-link" data-product-id='${matchingProduct.id}'>
               Delete
             </span>
           </div>
@@ -102,3 +102,15 @@ cart.forEach((cartItem) => {
 
 // PUT THE GENERATED HTML ON THE PAGE NOW USING THE DOM
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+
+// ADD EVENTLISTENERS TO ALL DELETE BUTTONS. WE WILL SELECT ALL DELETE BUTTONS USING QUERYSELECTORALL to delete product from cart.
+const jsDeleteBtn = document.querySelectorAll('.js-delete-link');
+
+jsDeleteBtn.forEach((link) => {
+  // WE ADD AN EVENTLISTER TO THE LINK PARAM WHICH SERVES AS OUR NEW DELETE BUTTONS
+  link.addEventListener('click', () => {
+    // REMOVE THE PRODUCT FROM THE CART AND UPDATE THE CART WHEN THE DELETE BUTTON IS CLICKED
+    const productId = link.dataset.productId;
+    removeFromCart(productId);
+  });
+})

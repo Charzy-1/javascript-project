@@ -1,11 +1,11 @@
-export const cart = [
+export let cart = [
   {
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     quantity: 2
   }, 
   {
     productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quantity: 2
+    quantity: 1
   }
 ];
 
@@ -30,4 +30,22 @@ export function addToCart(productId) {
       quantity: 1
     });
   }
+}
+
+// FUNCTION TO REMOVE A PRODUCT FROM CART. it takes the productid we have and remove it from the cart
+export function removeFromCart (productId) {
+  // STEP 1: CREATE A NEW ARRAY
+  const newCartArray = [];
+
+  // STEP 2: LOOP THROUGH THE cart.JS ARRAY
+  cart.forEach((cartItem) => {
+    // STEP 3: push EACH PRODUCT (cartItem) TO THE NEW ARRAY EXCEPT FOR THIS PROUDCTID which we stored already in a variable inside where we added eventlistner to the buttons (link) in our chechout.js page that is being cliced.
+
+    if (cartItem.productId !== productId) {
+      newCartArray.push(cartItem);
+    }
+  });
+
+  // SO OUR NEW CART NOW REPLACES THE CART.JS ARRAY UP THERE
+  cart = newCartArray;
 }
