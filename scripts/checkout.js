@@ -1,6 +1,13 @@
 import { cart, removeFromCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 
+// GETING TODAY'S DATE USING DAY JS XTERNAL LIBRARY
+const today = dayjs();
+
+// Adding 7 days to today's date using .add
+const deliveryDate = today.add(7, 'days');
+console.log(deliveryDate);
+
 // THE LAST STEP IS TO COMBINE THE HTML TOGETHER AND PUT IT ON THE PAGE BY STORING IT IN A A VARIABLE
 // SO EACH TIME WE LOOP THROUGH THE CART WE ARE GOING TO ADD THE HTML INTO THE EMPTY STRING BELOW
 
