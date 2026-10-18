@@ -6,7 +6,9 @@ const today = dayjs();
 
 // Adding 7 days to today's date using .add
 const deliveryDate = today.add(7, 'days');
-console.log(deliveryDate);
+console.log(deliveryDate.format('dddd, MMMM D'));
+
+
 
 // THE LAST STEP IS TO COMBINE THE HTML TOGETHER AND PUT IT ON THE PAGE BY STORING IT IN A A VARIABLE
 // SO EACH TIME WE LOOP THROUGH THE CART WE ARE GOING TO ADD THE HTML INTO THE EMPTY STRING BELOW
