@@ -1,6 +1,7 @@
 import { cart, removeFromCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+import { deliveryOptions } from '../data/deliveryOptions.js';
 
 // GETING TODAY'S DATE USING DAY JS XTERNAL LIBRARY
 const today = dayjs();
@@ -67,47 +68,57 @@ cart.forEach((cartItem) => {
             Choose a delivery option:
           </div>
 
-          <div class="delivery-option">
-            <input type="radio" class="delivery-option-input"
-              name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Tuesday, June 21
-              </div>
-              <div class="delivery-option-price">
-                FREE Shipping
-              </div>
-            </div>
-          </div>
-          <div class="delivery-option">
-            <input type="radio" checked class="delivery-option-input"
-              name="${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Wednesday, June 15
-              </div>
-              <div class="delivery-option-price">
-                $4.99 - Shipping
-              </div>
-            </div>
-          </div>
-          <div class="delivery-option">
-            <input type="radio" class="delivery-option-input"
-              name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Monday, June 13
-              </div>
-              <div class="delivery-option-price">
-                $9.99 - Shipping
-              </div>
-            </div>
-          </div>
+          ${delieveryOptionsHTML(matchingProduct, cartItem)}
         </div>
       </div>
     </div>
   `;
 });
+
+// LETS WRITE A FUNCTION TO GENERATE HTML FOR DELIVERY OPTION
+function delieveryOptionsHTML (matchingProduct, cartItem) {
+  // Commbining the html generated below
+  let deliveryHTMl = '';
+
+  // LOOPING THROUGH THE DELIVERY OPTION
+  deliveryOptions.forEach((deliveryOption) => {
+    // Get today's date using dayjs and put into the html generated
+    const today = dayjs();
+    const deliveryDate = today.add(
+      deliveryOption.deliveryDays, 'days'
+    );
+
+    const dateFormat = deliveryDate.format('dddd, MMMM D');
+
+    const PriceStrings = deliveryOption.priceCents === 0 
+      ? 'FREE'
+      : `$${(deliveryOption.priceCents / 100).toFixed(2)} -`;
+
+      // TO FIGURE OUT WHICH DELIVER OPTION IS CHECKED
+      // to be checked if delivery option id matches the delivery option id in the cart
+      const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
+
+    // Generate some HTML
+    deliveryHTMl += `
+      <div class="delivery-option">
+        <input type="radio"  
+        ${isChecked ? 'checked' : ''}
+        class="delivery-option-input"
+          name="delivery-option-${matchingProduct.id}">
+        <div>
+          <div class="delivery-option-date">
+            ${dateFormat}
+          </div>
+          <div class="delivery-option-price">
+            ${PriceStrings} Shipping
+          </div>
+        </div>
+      </div>
+    `
+  });
+
+  return deliveryHTMl;
+}
 
 // PUT THE GENERATED HTML ON THE PAGE NOW USING THE DOM
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
