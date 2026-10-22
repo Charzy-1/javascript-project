@@ -138,7 +138,3 @@ jsDeleteBtn.forEach((link) => {
     container.remove();
   });
 })
-
-function newFunction () {
-  console.log('Testin a function')
-}
