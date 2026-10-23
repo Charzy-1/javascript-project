@@ -142,3 +142,5 @@ jsDeleteBtn.forEach((link) => {
 function addfuntion() {
   console.log('Testing');
 }
+
+addfuntion()
