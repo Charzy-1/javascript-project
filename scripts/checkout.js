@@ -145,4 +145,3 @@ function addfuntion() {
 
 addfuntion()
 
-console.log('I am just trying');
