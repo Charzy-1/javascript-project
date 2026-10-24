@@ -143,5 +143,7 @@ function addfuntion() {
   console.log('Testing');
 }
 
-addfuntion()
+function addTree () {
+  console.log('The new log');
+}
 
