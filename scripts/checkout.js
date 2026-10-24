@@ -139,9 +139,6 @@ jsDeleteBtn.forEach((link) => {
   });
 })
 
-function addfuntion() {
-  console.log('Testing');
-}
 
 function addTree () {
   console.log('The new log');
