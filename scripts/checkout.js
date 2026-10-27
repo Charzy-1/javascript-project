@@ -141,7 +141,7 @@ jsDeleteBtn.forEach((link) => {
 
 
 function addTree () {
-  console.log('The new log');
+  
   console.log('Addition');
 }
 
