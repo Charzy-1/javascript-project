@@ -68,3 +68,6 @@ export function removeFromCart (productId) {
   saveToStorage();
 }
 
+function addFunc () {
+  console.log('This is just a test I will come soon');
+}
