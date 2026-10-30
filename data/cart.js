@@ -71,3 +71,20 @@ export function removeFromCart (productId) {
 function addFunc () {
   console.log('This is just a test I will come soon');
 }
+
+// Function to update deliveryoption 
+export function updateDeliveryOption (productId, deliveryOptionId) {
+  // Check if product name is already in the cart by looping through the cart using forEach method
+
+  let matchingItem;
+
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
+
+  matchingItem.deliveryOptionId = deliveryOptionId;
+
+  saveToStorage()
+}
