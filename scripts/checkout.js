@@ -32,11 +32,35 @@ cart.forEach((cartItem) => {
     }
   });
 
+  // GET THE DELIVERY OPTION OUT OF THE CART
+  const deliveryOptionId = cartItem.deliveryOptionId;
+
+  // USE THE ID TO FIND THE FULL DELIVERY OPTION
+  let deliveryOption;
+
+  deliveryOptions.forEach((option) => {
+    if (option.id === deliveryOptionId) {
+      deliveryOption = option;
+    }
+  })
+
+  if (!deliveryOption) {
+  console.log('Delivery option not found');
+  return;
+}
+
+  const today = dayjs();
+    const deliveryDate = today.add(
+      deliveryOption.deliveryDays, 'days'
+  );
+
+  const dateFormat = deliveryDate.format('dddd, MMMM D');
+
   // GENERATE THE HTML
   cartSummaryHTML += 
   `<div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
-        Delivery date: Wednesday, June 15
+        Delivery date: ${dateFormat}
       </div>
 
       <div class="cart-item-details-grid">
